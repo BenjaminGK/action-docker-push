@@ -21,9 +21,9 @@ inputs:
     required: false
     default: false
   image-name:
-    description: 'Docker image name in the format <org>/<repo>. Default is {{ github.repository }}'
+    description: 'Docker image name in the format <org>/<repo>. Default is ghcr.io/{{ github.repository }}'
     required: false
-    default: ${{ github.repository }}
+    default: ghcr.io/${{ github.repository }}
   cache-from:
     description: 'External cache sources for buildx'
     required: false
@@ -51,7 +51,7 @@ runs:
       uses: docker/metadata-action@v5
       with:
         images: |
-          ghcr.io/${{ inputs.image-name }}
+          ${{ inputs.image-name }}
         tags: |
           type=ref,event=branch
           type=ref,event=pr
